@@ -21,6 +21,9 @@ func DB() martini.Handler {
 	return func(c martini.Context) {
 		s := session.Clone()
 		c.Map(s.DB("advent"))
+
+		defer s.Close()
+		c.Next()
 	}
 }
 
